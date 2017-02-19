@@ -11,4 +11,16 @@
 #
 
 dir=$1
+for file in "$dir"/*; do
+  name=${file%.*}
+  ext=${file##*.}
+  if [[ $ext == fits ]] && ! [[ -f "$name".cat ]]; then
+    echo $file
+  fi
+done
+
+if ! [ -d $dir ]; then
+  echo "This directory does not exist!"
+  exit 0
+fi
 
